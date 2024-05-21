@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import MainPage from "./components/MainPage/MainPage";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
+import {useEffect, useState} from "react";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [user, setUser] = useState({name: '', lastname:''})
+
+    useEffect(() => {
+        const userName = prompt('Как вас зовут?')
+        const userLastName = prompt('Какая у вас фамилия?')
+        setUser({name: userName, lastname: userLastName})
+    },[])
+    console.log(user)
+    return (
+        <div>
+            {
+                user.name === 'John' && user.lastname === 'Johns'?(
+                    <MainPage user={user}/>
+                ):(
+                    <ErrorPage user={user}/>
+                )
+            }
+        </div>
+    );
 }
 
 export default App;
